@@ -1,7 +1,6 @@
-﻿namespace Data
-{
-    public class Class1
-    {
+﻿namespace Data;
 
-    }
+public class Class1
+{
+
 }

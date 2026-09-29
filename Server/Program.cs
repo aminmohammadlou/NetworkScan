@@ -1,16 +1,27 @@
-﻿while (true)
-{
-    Console.WriteLine("Enter your choice number: ");
-    Console.WriteLine("1: Network scan   2: Systems differentials");
-    var choice = Console.ReadLine();
+﻿using Server;
+using Service.Services;
 
-    if (string.IsNullOrWhiteSpace(choice) || !int.TryParse(choice, out var choiceNumber) || choiceNumber is not (1 or 2))
-        Console.WriteLine("Wrong input.Please try again. \n");
-    else
+var choiceNumber = Workflows.GetChoiceInput();
+
+var excelService = new ExcelService();
+var userService = new UserService(excelService);
+
+switch (choiceNumber)
+{
+    case 1:
+        var usersFileAddress = Workflows.GetUsersFileAddress();
+
+        await userService.SyncUsers(usersFileAddress);
+
+        break;
+
+    case 2:
+        break;
+
+    default:
+        Console.WriteLine("Internal error.Contact with developer.");
         break;
 }
-
-
 
 
 
