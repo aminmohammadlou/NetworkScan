@@ -21,6 +21,7 @@ await using var db = new NetworkScanDbContext(options);
 var repo = new Repo(db);
 var excelService = new ExcelService();
 var userService = new UserService(excelService, repo);
+var computerService = new ComputerService(excelService, repo);
 
 // Start of app
 var choiceNumber = Workflows.GetChoiceInput();
@@ -28,7 +29,7 @@ var choiceNumber = Workflows.GetChoiceInput();
 switch (choiceNumber)
 {
     case 1:
-        var usersFileAddress = Workflows.GetUsersFileAddress();
+        var usersFileAddress = Workflows.GetExcelFileAddress();
 
         Console.WriteLine("Syncing users.Please wait... \n");
 
@@ -38,6 +39,14 @@ switch (choiceNumber)
         break;
 
     case 2:
+        var computersFileAddress = Workflows.GetExcelFileAddress();
+
+        Console.WriteLine("Syncing computers.Please wait... \n");
+
+        await computerService.SyncComputers(computersFileAddress);
+
+        Console.WriteLine("Computers synced successfully.");
+
         break;
 
     default:

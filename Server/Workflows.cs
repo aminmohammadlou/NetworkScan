@@ -21,7 +21,7 @@ public static class Workflows
         return choiceNumber;
     }
 
-    public static string GetUsersFileAddress()
+    public static string GetExcelFileAddress()
     {
         string? usersFileAddress;
 

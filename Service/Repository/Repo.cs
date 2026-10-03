@@ -25,4 +25,9 @@ public class Repo(NetworkScanDbContext dbContext)
     {
         return await dbContext.Users.ToArrayAsync();
     }
+
+    public async Task<ComputerModel[]> GetComputers()
+    {
+        return await dbContext.Computers.ToArrayAsync();
+    }
 }

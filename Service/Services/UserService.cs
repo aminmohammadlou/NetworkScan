@@ -1,5 +1,5 @@
 ﻿using Data.Models;
-using Microsoft.EntityFrameworkCore;
+using Service.DtoConverters;
 using Service.Repository;
 
 namespace Service.Services;
@@ -29,7 +29,7 @@ public class UserService(ExcelService excelService, Repo repo)
                 userModel.IsActive = true;
             }
 
-            userModel.UpdatedTime = DateTime.Now;
+            userModel.UpdatedTime = DateTime.UtcNow;
         }
 
         // Create users that are in file but are not in db
@@ -45,8 +45,8 @@ public class UserService(ExcelService excelService, Repo repo)
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 IsActive = true,
-                CreatedTime = DateTime.Now,
-                UpdatedTime = DateTime.Now,
+                CreatedTime = DateTime.UtcNow,
+                UpdatedTime = DateTime.UtcNow,
                 MembershipType = user.MembershipType,
                 NationalNumber = user.NationalNumber,
                 Job = user.Job,

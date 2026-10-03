@@ -6,12 +6,15 @@ namespace Data.Persistence;
 public class NetworkScanDbContext(DbContextOptions<NetworkScanDbContext> options) : DbContext(options)
 {
     public DbSet<UserModel> Users { get; set; }
+    public DbSet<ComputerModel> Computers { get; set; }
+    public DbSet<HardDiskModel> HardDisks { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<UserModel>(entity => {
+        modelBuilder.Entity<UserModel>(entity =>
+        {
             entity.HasKey(x => x.UserId);
             entity.Property(a => a.UserId).ValueGeneratedOnAdd();
 
@@ -29,6 +32,43 @@ public class NetworkScanDbContext(DbContextOptions<NetworkScanDbContext> options
             entity.Property(a => a.NationalNumber).IsRequired();
             entity.HasIndex(a => a.NationalNumber).IsUnique();
 
+        });
+
+        modelBuilder.Entity<ComputerModel>(entity =>
+        {
+            entity.HasKey(x => x.ComputerId);
+            entity.Property(a => a.ComputerId).ValueGeneratedOnAdd();
+
+            entity.HasIndex(a => a.AssetCode).IsUnique();
+            entity.HasIndex(a => a.SealNumber1).IsUnique();
+            entity.HasIndex(a => a.SealNumber2).IsUnique();
+
+            entity.Property(a => a.ComputerName).IsRequired();
+            entity.HasIndex(a => a.ComputerName).IsUnique();
+
+            entity.Property(a => a.MacAddress).IsRequired();
+            entity.HasIndex(a => a.MacAddress).IsUnique();
+
+            entity.Property(a => a.Cpu).IsRequired();
+            entity.Property(a => a.Ram).IsRequired();
+            entity.Property(a => a.OperatingSystem).IsRequired();
+
+            entity.HasMany(x => x.HardDisks)
+                .WithOne(x => x.Computer)
+                .HasForeignKey(x => x.ComputerId)
+                .OnDelete(DeleteBehavior.NoAction);
+        });
+
+        modelBuilder.Entity<HardDiskModel>(entity =>
+        {
+            entity.HasKey(x => x.HardDiskId);
+            entity.Property(a => a.HardDiskId).ValueGeneratedOnAdd();
+
+            entity.Property(a => a.Name).IsRequired();
+            entity.Property(a => a.Capacity).IsRequired();
+
+            entity.Property(a => a.SerialNumber).IsRequired();
+            entity.HasIndex(a => a.SerialNumber).IsUnique();
         });
     }
 }
