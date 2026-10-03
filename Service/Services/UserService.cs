@@ -46,7 +46,11 @@ public class UserService(ExcelService excelService, Repo repo)
                 LastName = user.LastName,
                 IsActive = true,
                 CreatedTime = DateTime.Now,
-                UpdatedTime = DateTime.Now
+                UpdatedTime = DateTime.Now,
+                MembershipType = user.MembershipType,
+                NationalNumber = user.NationalNumber,
+                Job = user.Job,
+                PhoneNumber = user.PhoneNumber
             };
             await repo.AddEntity(userModel);
         }

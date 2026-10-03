@@ -20,6 +20,15 @@ public class NetworkScanDbContext(DbContextOptions<NetworkScanDbContext> options
 
             entity.Property(a => a.FirstName).IsRequired();
             entity.Property(a => a.LastName).IsRequired();
+            entity.Property(a => a.MembershipType).IsRequired();
+            entity.Property(a => a.Job).IsRequired();
+
+            entity.Property(a => a.PhoneNumber).IsRequired();
+            entity.HasIndex(a => a.PhoneNumber).IsUnique();
+
+            entity.Property(a => a.NationalNumber).IsRequired();
+            entity.HasIndex(a => a.NationalNumber).IsUnique();
+
         });
     }
 }

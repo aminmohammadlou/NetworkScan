@@ -30,6 +30,8 @@ switch (choiceNumber)
     case 1:
         var usersFileAddress = Workflows.GetUsersFileAddress();
 
+        Console.WriteLine("Syncing users.Please wait... \n");
+
         await userService.SyncUsers(usersFileAddress);
 
         Console.WriteLine("Users synced successfully.");

@@ -9,10 +9,10 @@ public static class Workflows
         while (true)
         {
             Console.WriteLine("Enter your choice number: ");
-            Console.WriteLine("1: Sync users   2: Network scan   3: Systems differentials");
+            Console.WriteLine("1: Sync users   2: Sync computers   3: Network scan   4: Systems differentials");
             var choice = Console.ReadLine();
 
-            if (string.IsNullOrWhiteSpace(choice) || !int.TryParse(choice, out choiceNumber) || choiceNumber is not (1 or 2 or 3))
+            if (string.IsNullOrWhiteSpace(choice) || !int.TryParse(choice, out choiceNumber) || choiceNumber is not (1 or 2 or 3 or 4))
                 Console.WriteLine("Wrong input.Please try again. \n");
             else
                 break;

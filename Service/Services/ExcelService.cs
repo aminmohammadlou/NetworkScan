@@ -24,7 +24,11 @@ public class ExcelService
             {
                 EmployeeCode = row.Cell(headers["EmployeeCode"]).GetValue<int>(),
                 FirstName = row.Cell(headers["FirstName"]).GetValue<string>(),
-                LastName = row.Cell(headers["LastName"]).GetValue<string>()
+                LastName = row.Cell(headers["LastName"]).GetValue<string>(),
+                MembershipType = row.Cell(headers["MembershipType"]).GetValue<string>(),
+                NationalNumber = row.Cell(headers["NationalNumber"]).GetValue<string>(),
+                Job = row.Cell(headers["Job"]).GetValue<string>(),
+                PhoneNumber = row.Cell(headers["PhoneNumber"]).GetValue<string>()
             }).ToArray();
     }
 }
